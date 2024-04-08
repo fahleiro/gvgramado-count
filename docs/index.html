@@ -20,6 +20,7 @@
   .container {
     text-align: center;
     position: relative;
+    z-index: 1; /* Garantindo que os conteúdos fiquem acima da imagem */
   }
 
   h1 {
@@ -54,13 +55,13 @@
     top: 0; /* Posicionando no topo da página */
     left: 50%;
     transform: translateX(-50%);
-    z-index: 1; /* Garantindo que a imagem fique no topo */
+    z-index: 0; /* Garantindo que a imagem fique no fundo */
   }
 </style>
 </head>
 <body>
+<img src="serra.jpg" alt="Serra" id="image">
 <div class="container">
-  <img src="serra.jpg" alt="Serra" id="image">
   <h1>CONTAGEM DE DIAS PARA SI PERDEMO</h1>
   <div id="countdown">
     <div class="number" id="days">0</div>
