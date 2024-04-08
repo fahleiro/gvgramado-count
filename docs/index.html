@@ -48,30 +48,17 @@
     font-size: 36px;
   }
 
-  .rotate-square {
+  #image {
     position: absolute;
-    top: 0;
-    left: 0;
-    width: 100px;
-    height: 100px;
-    background-color: transparent;
-    border: 2px solid orange;
-    border-radius: 50%;
-    animation: rotate 10s linear infinite;
-  }
-
-  @keyframes rotate {
-    0% {
-      transform: rotate(0deg);
-    }
-    100% {
-      transform: rotate(360deg);
-    }
+    top: -100px; /* Posicionando acima do título */
+    left: 50%;
+    transform: translateX(-50%);
   }
 </style>
 </head>
 <body>
 <div class="container">
+  <img src="serra.jpg" alt="Serra" id="image">
   <h1>CONTAGEM DE DIAS PARA SI PERDEMO</h1>
   <div id="countdown">
     <div class="number" id="days">0</div>
@@ -79,7 +66,6 @@
     <div class="number" id="minutes">0</div>
     <div class="number" id="seconds">0</div>
   </div>
-  <div class="rotate-square"></div>
 </div>
 
 <script>
