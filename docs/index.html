@@ -18,13 +18,17 @@
 
   .container {
     text-align: center;
+    position: relative;
   }
 
   h1 {
-    font-size: 36px;
-    color: orange; /* Alterado para orange */
-    position: relative; /* Adicionado para posicionar as letras */
-    z-index: 1; /* Adicionado para garantir que as letras fiquem na frente dos blocos */
+    font-size: 50px; /* Aumentado o tamanho das letras */
+    color: orange;
+    position: absolute; /* Colocado como posição absoluta */
+    top: 0; /* Colocado no topo da página */
+    left: 50%; /* Centralizado horizontalmente */
+    transform: translateX(-50%); /* Centralizado horizontalmente */
+    z-index: 1;
   }
 
   #countdown {
@@ -33,7 +37,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-top: 20px; /* Adicionado para dar espaço entre o título e a contagem */
+    margin-top: 80px; /* Aumentado o espaço entre o título e a contagem */
   }
 
   .block {
@@ -87,6 +91,7 @@
       span.style.left = Math.random() * window.innerWidth + 'px';
       span.style.top = Math.random() * window.innerHeight + 'px';
       span.style.color = 'orange'; /* Alterado para orange */
+      span.style.fontSize = '50px'; /* Alterado o tamanho das letras */
       span.style.transition = '1s';
       document.body.appendChild(span);
 
