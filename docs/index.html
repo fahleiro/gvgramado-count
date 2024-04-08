@@ -22,22 +22,25 @@
 
   h1 {
     font-size: 36px;
-    color: #fff;
+    color: orange; /* Alterado para orange */
+    position: relative; /* Adicionado para posicionar as letras */
+    z-index: 1; /* Adicionado para garantir que as letras fiquem na frente dos blocos */
   }
 
   #countdown {
     font-size: 48px;
-    color: #fff;
+    color: orange; /* Alterado para orange */
     display: flex;
     justify-content: center;
     align-items: center;
+    margin-top: 20px; /* Adicionado para dar espaço entre o título e a contagem */
   }
 
   .block {
     display: inline-block;
-    margin: 0 5px;
-    width: 60px;
-    height: 60px;
+    margin: 0 10px; /* Aumentado o espaço entre os blocos */
+    width: 80px; /* Aumentado o tamanho dos blocos */
+    height: 80px; /* Aumentado o tamanho dos blocos */
     background-color: #444;
     border-radius: 10px;
     animation: pulse 1s infinite;
@@ -83,7 +86,7 @@
       span.style.position = 'absolute';
       span.style.left = Math.random() * window.innerWidth + 'px';
       span.style.top = Math.random() * window.innerHeight + 'px';
-      span.style.color = 'white';
+      span.style.color = 'orange'; /* Alterado para orange */
       span.style.transition = '1s';
       document.body.appendChild(span);
 
