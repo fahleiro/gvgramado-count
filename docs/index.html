@@ -14,19 +14,22 @@
     justify-content: center;
     align-items: center;
     height: 100vh;
-    position: relative; /* Definindo a posição relativa para o corpo */
+    position: relative;
   }
 
   .container {
     text-align: center;
     position: relative;
-    z-index: 1; /* Garantindo que os conteúdos fiquem acima da imagem */
+    z-index: 1;
+    max-width: 80%; /* Adicionado limite de largura */
+    margin: auto; /* Centralizando o conteúdo */
+    padding: 0 20px; /* Adicionado padding nas laterais */
   }
 
   h1 {
     font-size: 36px;
     color: orange;
-    margin-top: 20px; /* Adicionado espaço acima do título */
+    margin-top: 20px;
   }
 
   #countdown {
@@ -35,7 +38,8 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-top: 20px; /* Adicionado espaço acima da contagem */
+    margin-top: 20px;
+    flex-wrap: wrap; /* Adicionado quebra de linha */
   }
 
   .number {
@@ -43,23 +47,43 @@
     height: 80px;
     background-color: #444;
     border-radius: 10px;
-    margin: 0 10px; /* Espaçamento entre os números */
+    margin: 0 10px;
     display: flex;
     justify-content: center;
     align-items: center;
     font-size: 36px;
+    margin-top: 10px; /* Adicionado espaçamento entre os números */
   }
 
   #image {
     position: absolute;
-    top: 0; /* Posicionando no topo da página */
+    top: 0;
     left: 50%;
     transform: translateX(-50%);
-    z-index: 0; /* Garantindo que a imagem fique no fundo */
+    z-index: 0;
+  }
+
+  @media screen and (max-width: 768px) { /* Adicionada media query para telas menores */
+    h1 {
+      font-size: 24px; /* Reduzindo o tamanho da fonte */
+    }
+    #countdown {
+      font-size: 36px; /* Reduzindo o tamanho da fonte */
+    }
+    .number {
+      width: 60px; /* Reduzindo o tamanho dos números */
+      height: 60px; /* Reduzindo o tamanho dos números */
+      font-size: 24px; /* Reduzindo o tamanho da fonte dos números */
+    }
   }
 </style>
 </head>
 <body>
+<audio controls autoplay loop>
+  <source src="sua_musica.mp3" type="audio/mpeg">
+  Your browser does not support the audio element.
+</audio>
+
 <img src="serra.jpg" alt="Serra" id="image">
 <div class="container">
   <h1>CONTAGEM DE DIAS PARA SI PERDEMO</h1>
@@ -72,37 +96,27 @@
 </div>
 
 <script>
-  // Defina a data alvo para a contagem regressiva
   const targetDate = new Date('2024-08-17T21:00:00').getTime();
 
-  // Atualize a contagem regressiva a cada segundo
   const countdown = setInterval(function() {
-    // Obtenha a data atual
     const now = new Date().getTime();
-
-    // Calcule a diferença entre a data alvo e a data atual
     const difference = targetDate - now;
-
-    // Calcule dias, horas, minutos e segundos restantes
     const days = Math.floor(difference / (1000 * 60 * 60 * 24));
     const hours = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
     const minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
     const seconds = Math.floor((difference % (1000 * 60)) / 1000);
 
-    // Atualize o conteúdo dos números da contagem regressiva
     document.getElementById('days').innerText = formatNumber(days);
     document.getElementById('hours').innerText = formatNumber(hours);
     document.getElementById('minutes').innerText = formatNumber(minutes);
     document.getElementById('seconds').innerText = formatNumber(seconds);
 
-    // Se a contagem regressiva acabou, pare de atualizar
     if (difference < 0) {
       clearInterval(countdown);
       document.getElementById('countdown').innerHTML = '<p>A contagem regressiva terminou!</p>';
     }
   }, 1000);
 
-  // Função para formatar números menores que 10 com zero à esquerda
   function formatNumber(number) {
     return number < 10 ? '0' + number : number;
   }
