@@ -21,38 +21,37 @@
     text-align: center;
     position: relative;
     z-index: 1;
-    max-width: 80%; /* Adicionado limite de largura */
-    margin: auto; /* Centralizando o conteúdo */
-    padding: 0 20px; /* Adicionado padding nas laterais */
+    max-width: 80%;
+    margin: auto;
+    padding: 0 5%; /* Alterado para uma margem de 5% nas laterais */
   }
 
   h1 {
-    font-size: 36px;
+    font-size: 4vw; /* Alterado para tamanho de fonte responsivo */
     color: orange;
-    margin-top: 20px;
+    margin-top: 2%; /* Alterado para margem de 2% acima */
   }
 
   #countdown {
-    font-size: 48px;
+    font-size: 6vw; /* Alterado para tamanho de fonte responsivo */
     color: orange;
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-top: 20px;
-    flex-wrap: wrap; /* Adicionado quebra de linha */
+    margin-top: 2%; /* Alterado para margem de 2% acima */
+    flex-wrap: wrap;
   }
 
   .number {
-    width: 80px;
-    height: 80px;
+    width: 20%; /* Alterado para largura de 20% */
+    padding-top: 20%; /* Alterado para manter proporção quadrada */
     background-color: #444;
     border-radius: 10px;
-    margin: 0 10px;
+    margin: 2% 2%; /* Alterado para margem de 2% */
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: 36px;
-    margin-top: 10px; /* Adicionado espaçamento entre os números */
+    font-size: 4vw; /* Alterado para tamanho de fonte responsivo */
   }
 
   #image {
@@ -61,30 +60,27 @@
     left: 50%;
     transform: translateX(-50%);
     z-index: 0;
+    width: 100%; /* Adicionado para ocupar toda a largura */
+    height: auto; /* Adicionado para manter a proporção */
   }
 
-  @media screen and (max-width: 768px) { /* Adicionada media query para telas menores */
+  @media screen and (max-width: 768px) {
     h1 {
-      font-size: 24px; /* Reduzindo o tamanho da fonte */
+      font-size: 6vw; /* Ajustado para telas menores */
     }
     #countdown {
-      font-size: 36px; /* Reduzindo o tamanho da fonte */
+      font-size: 8vw; /* Ajustado para telas menores */
     }
     .number {
-      width: 60px; /* Reduzindo o tamanho dos números */
-      height: 60px; /* Reduzindo o tamanho dos números */
-      font-size: 24px; /* Reduzindo o tamanho da fonte dos números */
+      width: 30%; /* Ajustado para telas menores */
+      padding-top: 30%; /* Ajustado para telas menores */
+      font-size: 6vw; /* Ajustado para telas menores */
     }
-  }
-
-  /* Oculta o elemento de áudio */
-  audio {
-    display: none;
   }
 </style>
 </head>
 <body>
-<audio controls autoplay loop>
+<audio autoplay loop>
   <source src="sua_musica.mp3" type="audio/mpeg">
   Your browser does not support the audio element.
 </audio>
