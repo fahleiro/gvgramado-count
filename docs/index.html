@@ -61,6 +61,15 @@
       transform: scale(1);
     }
   }
+
+  @keyframes rotateLetters {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  }
 </style>
 </head>
 <body>
@@ -76,13 +85,11 @@
 </div>
 
 <script>
-  // Função para fazer as letras caírem aleatoriamente
-  function scatterLetters() {
+  // Função para fazer as letras rodarem aleatoriamente pelo alfabeto até parar na letra correta
+  function rotateLetters() {
     const title = document.getElementById('title');
     const titleText = title.innerText;
     const letters = titleText.split('');
-
-    title.innerHTML = '';
 
     letters.forEach(letter => {
       const span = document.createElement('span');
@@ -92,19 +99,18 @@
       span.style.top = Math.random() * window.innerHeight + 'px';
       span.style.color = 'orange'; /* Alterado para orange */
       span.style.fontSize = '50px'; /* Alterado o tamanho das letras */
-      span.style.transition = '1s';
+      span.style.animation = 'rotateLetters 5s linear infinite'; /* Adicionado a animação de rotação */
       document.body.appendChild(span);
 
       setTimeout(() => {
         span.style.left = title.offsetLeft + 'px';
         span.style.top = title.offsetTop + 'px';
-        span.style.color = 'transparent';
       }, 100);
     });
   }
 
-  // Chame a função para fazer as letras caírem
-  scatterLetters();
+  // Chame a função para fazer as letras rodarem
+  rotateLetters();
 
   // Defina a data alvo para a contagem regressiva
   const targetDate = new Date('2024-08-17T21:00:00').getTime();
