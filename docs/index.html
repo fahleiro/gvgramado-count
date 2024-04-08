@@ -22,47 +22,45 @@
   }
 
   h1 {
-    font-size: 50px; /* Aumentado o tamanho das letras */
+    font-size: 36px;
     color: orange;
-    position: absolute; /* Colocado como posição absoluta */
-    top: 0; /* Colocado no topo da página */
-    left: 50%; /* Centralizado horizontalmente */
-    transform: translateX(-50%); /* Centralizado horizontalmente */
-    z-index: 1;
+    margin-top: 20px; /* Adicionado espaço acima do título */
   }
 
   #countdown {
     font-size: 48px;
-    color: orange; /* Alterado para orange */
+    color: orange;
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-top: 80px; /* Aumentado o espaço entre o título e a contagem */
+    margin-top: 20px; /* Adicionado espaço acima da contagem */
   }
 
-  .block {
-    display: inline-block;
-    margin: 0 10px; /* Aumentado o espaço entre os blocos */
-    width: 80px; /* Aumentado o tamanho dos blocos */
-    height: 80px; /* Aumentado o tamanho dos blocos */
+  .number {
+    width: 80px;
+    height: 80px;
     background-color: #444;
     border-radius: 10px;
-    animation: pulse 1s infinite;
+    margin: 0 10px; /* Espaçamento entre os números */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 36px;
   }
 
-  @keyframes pulse {
-    0% {
-      transform: scale(1);
-    }
-    50% {
-      transform: scale(1.2);
-    }
-    100% {
-      transform: scale(1);
-    }
+  .rotate-square {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100px;
+    height: 100px;
+    background-color: transparent;
+    border: 2px solid orange;
+    border-radius: 50%;
+    animation: rotate 10s linear infinite;
   }
 
-  @keyframes rotateLetters {
+  @keyframes rotate {
     0% {
       transform: rotate(0deg);
     }
@@ -74,44 +72,17 @@
 </head>
 <body>
 <div class="container">
-  <h1 id="title">CONTAGEM DE DIAS PRA SI PERDEMO</h1>
-  <div id="countdown" class="countdown">
-    <div class="block"></div>
-    <div class="block"></div>
-    <div class="block"></div>
-    <div class="block"></div>
-    <div class="block"></div>
+  <h1>CONTAGEM DE DIAS PARA SI PERDEMO</h1>
+  <div id="countdown">
+    <div class="number" id="days">0</div>
+    <div class="number" id="hours">0</div>
+    <div class="number" id="minutes">0</div>
+    <div class="number" id="seconds">0</div>
   </div>
+  <div class="rotate-square"></div>
 </div>
 
 <script>
-  // Função para fazer as letras rodarem aleatoriamente pelo alfabeto até parar na letra correta
-  function rotateLetters() {
-    const title = document.getElementById('title');
-    const titleText = title.innerText;
-    const letters = titleText.split('');
-
-    letters.forEach(letter => {
-      const span = document.createElement('span');
-      span.innerText = letter;
-      span.style.position = 'absolute';
-      span.style.left = Math.random() * window.innerWidth + 'px';
-      span.style.top = Math.random() * window.innerHeight + 'px';
-      span.style.color = 'orange'; /* Alterado para orange */
-      span.style.fontSize = '50px'; /* Alterado o tamanho das letras */
-      span.style.animation = 'rotateLetters 5s linear infinite'; /* Adicionado a animação de rotação */
-      document.body.appendChild(span);
-
-      setTimeout(() => {
-        span.style.left = title.offsetLeft + 'px';
-        span.style.top = title.offsetTop + 'px';
-      }, 100);
-    });
-  }
-
-  // Chame a função para fazer as letras rodarem
-  rotateLetters();
-
   // Defina a data alvo para a contagem regressiva
   const targetDate = new Date('2024-08-17T21:00:00').getTime();
 
@@ -129,20 +100,23 @@
     const minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
     const seconds = Math.floor((difference % (1000 * 60)) / 1000);
 
-    // Atualize o conteúdo da div com a contagem regressiva
-    document.getElementById('countdown').innerHTML = `
-      <div class="block">${days}</div>
-      <div class="block">${hours}</div>
-      <div class="block">${minutes}</div>
-      <div class="block">${seconds}</div>
-    `;
+    // Atualize o conteúdo dos números da contagem regressiva
+    document.getElementById('days').innerText = formatNumber(days);
+    document.getElementById('hours').innerText = formatNumber(hours);
+    document.getElementById('minutes').innerText = formatNumber(minutes);
+    document.getElementById('seconds').innerText = formatNumber(seconds);
 
     // Se a contagem regressiva acabou, pare de atualizar
     if (difference < 0) {
       clearInterval(countdown);
-      document.getElementById('countdown').innerHTML = 'A contagem regressiva terminou!';
+      document.getElementById('countdown').innerHTML = '<p>A contagem regressiva terminou!</p>';
     }
   }, 1000);
+
+  // Função para formatar números menores que 10 com zero à esquerda
+  function formatNumber(number) {
+    return number < 10 ? '0' + number : number;
+  }
 </script>
 </body>
 </html>
