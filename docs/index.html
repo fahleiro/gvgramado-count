@@ -79,14 +79,14 @@
     }
   }
 
-  /* Oculta o elemento de áudio */
-  audio {
-    display: none;
+  /* Oculta o botão de play */
+  audio::-webkit-media-controls-start-playback-button {
+    display: none !important;
   }
 </style>
 </head>
-<body>
-<audio autoplay loop>
+<body onclick="startAudio()">
+<audio controls loop id="background-music">
   <source src="sua_musica.mp3" type="audio/mpeg">
   Your browser does not support the audio element.
 </audio>
@@ -126,6 +126,13 @@
 
   function formatNumber(number) {
     return number < 10 ? '0' + number : number;
+  }
+
+  function startAudio() {
+    const audio = document.getElementById('background-music');
+    audio.play();
+    // Remove o evento de clique para evitar múltiplas reproduções
+    document.body.removeEventListener('click', startAudio);
   }
 </script>
 </body>
