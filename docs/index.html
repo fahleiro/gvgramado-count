@@ -81,7 +81,7 @@
 </style>
 </head>
 <body>
-<audio controls autoplay loop>
+<audio controls loop id="background-music">
   <source src="sua_musica.mp3" type="audio/mpeg">
   Your browser does not support the audio element.
 </audio>
@@ -122,6 +122,11 @@
   function formatNumber(number) {
     return number < 10 ? '0' + number : number;
   }
+
+  // Reproduz a música automaticamente após o carregamento da página
+  document.addEventListener('DOMContentLoaded', function() {
+    document.getElementById('background-music').play();
+  });
 </script>
 </body>
 </html>
