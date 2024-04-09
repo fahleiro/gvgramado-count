@@ -78,10 +78,15 @@
       font-size: 24px; /* Reduzindo o tamanho da fonte dos números */
     }
   }
+
+  /* Oculta o elemento de áudio */
+  audio {
+    display: none;
+  }
 </style>
 </head>
-<body onclick="startAudio()">
-<audio controls loop id="background-music">
+<body>
+<audio autoplay loop>
   <source src="sua_musica.mp3" type="audio/mpeg">
   Your browser does not support the audio element.
 </audio>
@@ -121,13 +126,6 @@
 
   function formatNumber(number) {
     return number < 10 ? '0' + number : number;
-  }
-
-  function startAudio() {
-    const audio = document.getElementById('background-music');
-    audio.play();
-    // Remove o evento de clique para evitar múltiplas reproduções
-    document.body.removeEventListener('click', startAudio);
   }
 </script>
 </body>
