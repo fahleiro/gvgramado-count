@@ -12,8 +12,8 @@
     padding: 0;
     display: flex;
     justify-content: center;
-    align-items: center;
-    height: 100vh;
+    align-items: flex-start; /* Ajustado para alinhar os itens ao topo */
+    min-height: 100vh; /* Ajustado para manter o conteúdo acima do centro */
     position: relative;
   }
 
@@ -24,6 +24,7 @@
     max-width: 80%; /* Adicionado limite de largura */
     margin: auto; /* Centralizando o conteúdo */
     padding: 0 20px; /* Adicionado padding nas laterais */
+    margin-top: 20px; /* Adicionado espaço acima do container */
   }
 
   h1 {
@@ -58,11 +59,14 @@
   #image {
     max-width: 100%; /* Adicionado para garantir que a imagem não ultrapasse a largura da tela */
     height: auto; /* Adicionado para manter a proporção da imagem */
-    position: absolute;
-    top: 0;
-    left: 50%;
-    transform: translateX(-50%);
-    z-index: 0;
+    display: none; /* Oculta a imagem inicialmente */
+  }
+
+  #reveal-text {
+    font-size: 24px;
+    color: white;
+    cursor: pointer;
+    margin-bottom: 20px; /* Adicionado espaço abaixo do texto */
   }
 
   @media screen and (max-width: 768px) { /* Adicionada media query para telas menores */
@@ -79,20 +83,17 @@
     }
   }
 
-  /* Esconde o elemento de áudio */
-  #background-music {
-    display: none;
+  /* Oculta o botão de play */
+  audio::-webkit-media-controls-start-playback-button {
+    display: none !important;
   }
 </style>
 </head>
-<body onclick="startAudio()">
-<audio controls loop id="background-music">
-  <source src="sua_musica.mp3" type="audio/mpeg">
-  Your browser does not support the audio element.
-</audio>
-
-<img src="serra.jpg" alt="Serra" id="image">
+<body>
+<!-- Removido o elemento <audio> para ocultar o player de música -->
 <div class="container">
+  <div id="reveal-text" onclick="revealImage()">ME REVELE</div>
+  <img src="serra.jpg" alt="Serra" id="image">
   <h1>CONTAGEM DE DIAS PARA SI PERDIMO</h1>
   <div id="countdown">
     <div class="number" id="days">0</div>
@@ -133,6 +134,16 @@
     audio.play();
     // Remove o evento de clique para evitar múltiplas reproduções
     document.body.removeEventListener('click', startAudio);
+  }
+
+  function revealImage() {
+    const image = document.getElementById('image');
+    const revealText = document.getElementById('reveal-text');
+
+    image.style.display = 'block';
+    revealText.style.display = 'none';
+
+    startAudio(); // Inicia a música quando a imagem é revelada
   }
 </script>
 </body>
