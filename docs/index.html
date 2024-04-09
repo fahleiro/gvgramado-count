@@ -58,13 +58,11 @@
   #image {
     max-width: 100%; /* Adicionado para garantir que a imagem não ultrapasse a largura da tela */
     height: auto; /* Adicionado para manter a proporção da imagem */
-    display: none; /* Oculta a imagem inicialmente */
-  }
-
-  #reveal-text {
-    font-size: 24px;
-    color: white;
-    cursor: pointer;
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 0;
   }
 
   @media screen and (max-width: 768px) { /* Adicionada media query para telas menores */
@@ -81,19 +79,17 @@
     }
   }
 
-  /* Oculta o botão de play */
-  audio::-webkit-media-controls-start-playback-button {
-    display: none !important;
+  /* Esconde o elemento de áudio */
+  #background-music {
+    display: none;
   }
 </style>
 </head>
-<body>
+<body onclick="startAudio()">
 <audio controls loop id="background-music">
   <source src="sua_musica.mp3" type="audio/mpeg">
   Your browser does not support the audio element.
 </audio>
-
-<div id="reveal-text" onclick="revealImage()">ME REVELE</div>
 
 <img src="serra.jpg" alt="Serra" id="image">
 <div class="container">
@@ -137,16 +133,6 @@
     audio.play();
     // Remove o evento de clique para evitar múltiplas reproduções
     document.body.removeEventListener('click', startAudio);
-  }
-
-  function revealImage() {
-    const image = document.getElementById('image');
-    const revealText = document.getElementById('reveal-text');
-
-    image.style.display = 'block';
-    revealText.style.display = 'none';
-
-    startAudio(); // Inicia a música quando a imagem é revelada
   }
 </script>
 </body>
