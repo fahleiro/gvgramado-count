@@ -80,7 +80,7 @@
   }
 </style>
 </head>
-<body>
+<body onclick="startAudio()">
 <audio controls loop id="background-music">
   <source src="sua_musica.mp3" type="audio/mpeg">
   Your browser does not support the audio element.
@@ -123,10 +123,12 @@
     return number < 10 ? '0' + number : number;
   }
 
-  // Reproduz a música automaticamente após o carregamento da página
-  document.addEventListener('DOMContentLoaded', function() {
-    document.getElementById('background-music').play();
-  });
+  function startAudio() {
+    const audio = document.getElementById('background-music');
+    audio.play();
+    // Remove o evento de clique para evitar múltiplas reproduções
+    document.body.removeEventListener('click', startAudio);
+  }
 </script>
 </body>
 </html>
