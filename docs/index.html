@@ -11,9 +11,9 @@
     margin: 0;
     padding: 0;
     display: flex;
-    justify-content: center;
-    align-items: flex-start; /* Ajustado para alinhar os itens ao topo */
-    min-height: 100vh; /* Ajustado para manter o conteúdo acima do centro */
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
     position: relative;
   }
 
@@ -21,10 +21,9 @@
     text-align: center;
     position: relative;
     z-index: 1;
-    max-width: 80%; /* Adicionado limite de largura */
-    margin: auto; /* Centralizando o conteúdo */
-    padding: 0 20px; /* Adicionado padding nas laterais */
-    margin-top: 20px; /* Adicionado espaço acima do container */
+    max-width: 80%;
+    margin: 20px auto;
+    padding: 0 20px;
   }
 
   h1 {
@@ -33,14 +32,14 @@
     margin-top: 20px;
   }
 
-  #countdown {
+  .countdown {
     font-size: 48px;
     color: orange;
     display: flex;
     justify-content: center;
     align-items: center;
     margin-top: 20px;
-    flex-wrap: wrap; /* Adicionado quebra de linha */
+    flex-wrap: wrap;
   }
 
   .number {
@@ -53,48 +52,46 @@
     justify-content: center;
     align-items: center;
     font-size: 36px;
-    margin-top: 10px; /* Adicionado espaçamento entre os números */
+    margin-top: 10px;
   }
 
   #image {
-    max-width: 100%; /* Adicionado para garantir que a imagem não ultrapasse a largura da tela */
-    height: auto; /* Adicionado para manter a proporção da imagem */
-    display: none; /* Oculta a imagem inicialmente */
+    max-width: 100%;
+    height: auto;
+    display: none;
   }
 
   #reveal-text {
     font-size: 24px;
     color: white;
     cursor: pointer;
-    margin-bottom: 20px; /* Adicionado espaço abaixo do texto */
+    margin-bottom: 20px;
   }
 
-  @media screen and (max-width: 768px) { /* Adicionada media query para telas menores */
+  @media screen and (max-width: 768px) {
     h1 {
-      font-size: 24px; /* Reduzindo o tamanho da fonte */
+      font-size: 24px;
     }
-    #countdown {
-      font-size: 36px; /* Reduzindo o tamanho da fonte */
+    .countdown {
+      font-size: 36px;
     }
     .number {
-      width: 60px; /* Reduzindo o tamanho dos números */
-      height: 60px; /* Reduzindo o tamanho dos números */
-      font-size: 24px; /* Reduzindo o tamanho da fonte dos números */
+      width: 60px;
+      height: 60px;
+      font-size: 24px;
     }
   }
 
-  /* Oculta o botão de play */
   audio::-webkit-media-controls-start-playback-button {
     display: none !important;
   }
 
-    /* Esconde o elemento de áudio */
   #background-music {
     display: none;
   }
 </style>
 </head>
-<body onclick="startAudio()"> <!-- Adicionado evento de clique para iniciar a música -->
+<body onclick="startAudio()">
 <audio controls loop id="background-music">
   <source src="sua_musica.mp3" type="audio/mpeg">
   Your browser does not support the audio element.
@@ -104,35 +101,46 @@
   <div id="reveal-text" onclick="revealImage()">REVEAL ME 👀</div>
   <img src="serra.jpg" alt="Serra" id="image">
   <h1>CONTAGEM DE DIAS PARA SI PERDIMO</h1>
-  <div id="countdown">
-    <div class="number" id="days">0</div>
-    <div class="number" id="hours">0</div>
-    <div class="number" id="minutes">0</div>
-    <div class="number" id="seconds">0</div>
+  <div class="countdown" id="countdown1">
+    <div class="number" id="days1">0</div>
+    <div class="number" id="hours1">0</div>
+    <div class="number" id="minutes1">0</div>
+    <div class="number" id="seconds1">0</div>
+  </div>
+</div>
+
+<!-- Novo Countdown -->
+<div class="container">
+  <h1>GREENVALLEY GRAMADO 2025, VAMODALE SIM OU CLARO</h1>
+  <div class="countdown" id="countdown2">
+    <div class="number" id="days2">0</div>
+    <div class="number" id="hours2">0</div>
+    <div class="number" id="minutes2">0</div>
+    <div class="number" id="seconds2">0</div>
   </div>
 </div>
 
 <script>
-  const targetDate = new Date('2024-08-17T21:00:00').getTime();
+  function startCountdown(targetDate, daysId, hoursId, minutesId, secondsId) {
+    setInterval(function() {
+      const now = new Date().getTime();
+      const difference = targetDate - now;
+      const days = Math.floor(difference / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((difference % (1000 * 60)) / 1000);
 
-  const countdown = setInterval(function() {
-    const now = new Date().getTime();
-    const difference = targetDate - now;
-    const days = Math.floor(difference / (1000 * 60 * 60 * 24));
-    const hours = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-    const minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
-    const seconds = Math.floor((difference % (1000 * 60)) / 1000);
+      document.getElementById(daysId).innerText = formatNumber(days);
+      document.getElementById(hoursId).innerText = formatNumber(hours);
+      document.getElementById(minutesId).innerText = formatNumber(minutes);
+      document.getElementById(secondsId).innerText = formatNumber(seconds);
 
-    document.getElementById('days').innerText = formatNumber(days);
-    document.getElementById('hours').innerText = formatNumber(hours);
-    document.getElementById('minutes').innerText = formatNumber(minutes);
-    document.getElementById('seconds').innerText = formatNumber(seconds);
-
-    if (difference < 0) {
-      clearInterval(countdown);
-      document.getElementById('countdown').innerHTML = '<p>A contagem regressiva terminou!</p><p>Meus mais sinceros agradecimentos a todos envolvidos!</p>';
-    }
-  }, 1000);
+      if (difference < 0) {
+        clearInterval(countdown);
+        document.getElementById('countdown').innerHTML = '<p>A contagem regressiva terminou!</p><p>Meus mais sinceros agradecimentos a todos envolvidos!</p>';
+      }
+    }, 1000);
+  }
 
   function formatNumber(number) {
     return number < 10 ? '0' + number : number;
@@ -141,7 +149,6 @@
   function startAudio() {
     const audio = document.getElementById('background-music');
     audio.play();
-    // Remove o evento de clique para evitar múltiplas reproduções
     document.body.removeEventListener('click', startAudio);
   }
 
@@ -152,8 +159,13 @@
     image.style.display = 'block';
     revealText.style.display = 'none';
 
-    startAudio(); // Inicia a música quando a imagem é revelada
+    startAudio();
   }
+
+  // Inicia as contagens regressivas
+  startCountdown(new Date('2024-08-17T21:00:00').getTime(), 'days1', 'hours1', 'minutes1', 'seconds1');
+  startCountdown(new Date('2025-08-17T21:00:00').getTime(), 'days2', 'hours2', 'minutes2', 'seconds2');
+
 </script>
 </body>
 </html>
